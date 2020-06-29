@@ -35,7 +35,8 @@
 #include "GCCode.hpp"
 #include "GCExtensionsBase.hpp"
 #include "Metronome.hpp"
-#include "ParallelDispatcher.hpp"
+// #include "ParallelDispatcher.hpp"
+#include "Dispatcher.hpp"
 #include "YieldCollaborator.hpp"
 
 class MM_OSInterface;
@@ -55,7 +56,7 @@ class MM_UtilizationTracker;
  * @todo Provide class documentation
  * @ingroup GC_Metronome
  */
-class MM_Scheduler : public MM_ParallelDispatcher
+class MM_Scheduler : public MM_Dispatcher
 {
 	/*
 	 * Data members
@@ -240,7 +241,7 @@ public:
 	void collectorInitialized(MM_RealtimeGC *gc);
 
 	MM_Scheduler(MM_EnvironmentBase *env, omrsig_handler_fn handler, void* handler_arg, uintptr_t defaultOSStackSize) :
-		MM_ParallelDispatcher(env, handler, handler_arg, defaultOSStackSize),
+		MM_Dispatcher(env, handler, handler_arg, defaultOSStackSize),
 		_mutatorStartTimeInNanos(J9CONST64(0)),
 		_incrementStartTimeInNanos(J9CONST64(0)),
 		_gcCode(J9MMCONSTANT_IMPLICIT_GC_DEFAULT),
