@@ -138,6 +138,7 @@ MM_VerboseManagerJava::createWriter(MM_EnvironmentBase *env, WriterType type, ch
 		break;
 
 	case VERBOSE_WRITER_FILE_LOGGING_SYNCHRONOUS:
+	// !@!@
 		writer = MM_VerboseWriterFileLoggingSynchronous::newInstance(env, this, filename, fileCount, iterations);
 		if (NULL == writer) {
 			writer = findWriterInChain(VERBOSE_WRITER_STANDARD_STREAM);

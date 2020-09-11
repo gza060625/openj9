@@ -3070,6 +3070,7 @@ hookAcquiringExclusiveInNative(J9HookInterface** hook, UDATA eventNum, void* voi
 /**
  * Report an event indicating that the GC is initialized
  */
+// !@!@ triggerGCInitialized
 jint
 triggerGCInitialized(J9VMThread* vmThread)
 {
@@ -3097,7 +3098,6 @@ triggerGCInitialized(J9VMThread* vmThread)
 
 	UDATA arrayletLeafSize = 0;
 	arrayletLeafSize = vm->arrayletLeafSize;
-
 	TRIGGER_J9HOOK_MM_OMR_INITIALIZED(
 		extensions->omrHookInterface,
 		vmThread->omrVMThread,

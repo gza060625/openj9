@@ -379,6 +379,8 @@ MM_VerboseFileLoggingOutput::openFile(MM_EnvironmentBase *env)
 	extensions->getForge()->free(filenameToOpen);
 	
 	j9file_printf(PORTLIB, _logFileDescriptor, VERBOSEGC_HEADER_TEXT_ALL, version);
+	j9file_printf(PORTLIB, _logFileDescriptor, VERBOSEGC_HEADER_TEXT_ALL, version);
+	j9file_printf(PORTLIB, _logFileDescriptor, VERBOSEGC_HEADER_TEXT_ALL, version);
 	
 	return true;
 }
@@ -427,18 +429,21 @@ MM_VerboseFileLoggingOutput::endOfCycle(J9VMThread *vmThread)
 		if(-1 != _logFileDescriptor){
 			j9file_write_text(_logFileDescriptor, _buffer->contents(), _buffer->currentSize());
 			j9file_write_text(_logFileDescriptor, "\n", 1);
+			j9file_write_text(_logFileDescriptor, "!!!@@@: endOfCycleA", 1);
 		} else {
 			j9file_write_text(J9PORT_TTY_ERR, _buffer->contents(), _buffer->currentSize());
 			j9file_write_text(J9PORT_TTY_ERR, "\n", 1);
 		}
 		_buffer->reset();
 	}
-	
+	// !!!@@@
+	j9file_write_text(_logFileDescriptor, "!!!@@@: endOfCycle logging out", 1);
 	if(rotating_files == _mode) {
 		_currentCycle = (_currentCycle + 1) % _numCycles;
 		if(0 == _currentCycle) {
 			closeFile(env);
 			_currentFile = (_currentFile + 1) % _numFiles;
+			j9file_write_text(_logFileDescriptor, "!!!@@@: endOfCycle logging ins", 1);
 		}
 	}
 }

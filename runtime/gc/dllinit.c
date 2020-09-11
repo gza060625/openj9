@@ -85,8 +85,16 @@ J9VMDllMain(J9JavaVM* vm, IDATA stage, void* reserved)
 			/* Register this module with trace */
 			UT_J9MM_MODULE_LOADED(J9_UTINTERFACE_FROM_VM(vm));
 			Trc_MM_VMInitStages_Event1(NULL);
+			
+			// !@!@ JIT_INITIALIZED
+			// rc = triggerGCInitialized(vm->mainThread);
 
-			rc = triggerGCInitialized(vm->mainThread);
+			// J9VMDllLoadInfo* entry = NULL;
+			// entry = FIND_DLL_TABLE_ENTRY( J9_VERBOSE_DLL_NAME );
+			// if( entry->loadFlags & LOAD_BY_DEFAULT)
+			// {
+			// 	rc = triggerGCInitialized(vm->mainThread);
+			// }
 
 			break;
 		
