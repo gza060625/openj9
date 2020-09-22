@@ -80,5 +80,5 @@ MM_VerboseHandlerJava::writeVmArgs(MM_VerboseManager *manager, MM_EnvironmentBas
 			writer->formatAndOutput(env, 2, "<vmarg name=\"%s%s\" value=\"%p\" />", escapedXMLString, dots, vmArgs->options[i].extraInfo);
 		}
 	}
-	writer->formatAndOutput(env, 1, "</vmargs>");
+	// writer->formatAndOutput(env, 1, "</vmargs>");
 }
