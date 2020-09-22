@@ -61,7 +61,7 @@ MM_VerboseHandlerJava::getThreadName(char *buf, UDATA bufLen, OMR_VMThread *omrT
 	releaseOMRVMThreadName(omrThread);
 	return consumedEntireString;
 }
-
+// !@!@ writeVmArgs
 void
 MM_VerboseHandlerJava::writeVmArgs(MM_VerboseManager *manager, MM_EnvironmentBase* env, J9JavaVM *vm)
 {
