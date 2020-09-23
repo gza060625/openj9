@@ -76,6 +76,7 @@ public:
 	J9HookInterface** getHookInterface(){ return _mmHooks; }
 
 	virtual void handleFileOpenError(MM_EnvironmentBase *env, char *fileName);
+	virtual void handleFileOpenSuccess(MM_EnvironmentBase *env, char *fileName);
 
 	MM_VerboseManagerJava(OMR_VM *omrVM)
 		: MM_VerboseManager(omrVM)
