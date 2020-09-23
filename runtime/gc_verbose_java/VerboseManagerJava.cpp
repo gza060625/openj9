@@ -184,13 +184,7 @@ MM_VerboseManagerJava::handleFileOpenError(MM_EnvironmentBase *env, char *fileNa
 void
 MM_VerboseManagerJava::handleFileOpenSuccess(MM_EnvironmentBase *env, char *fileName)
 {
-	// OMRPORT_ACCESS_FROM_OMRPORT(env->getPortLibrary());
-	// omrnls_printf(J9NLS_ERROR, J9NLS_GC_UNABLE_TO_OPEN_FILE, fileName);
-	// omrtty_printf("!@: handleFileOpenSuccess %s\n", fileName);
-	// PORT_ACCESS_FROM_JAVAVM(static_cast<J9JavaVM*>(_omrVM->_language_vm));
-	// JavaVMInitArgs* vmArgs = vm->vmArgsArray->actualVMArgs;
 	MM_VerboseWriterChain* writer = this->getWriterChain();
-	writer->formatAndOutput(env, 1, "!@ handleFileOpenSuccess::before writeVmArgs");
 	MM_VerboseHandlerJava::writeVmArgs(this, env, static_cast<J9JavaVM*>(_omrVM->_language_vm));
 }
 
