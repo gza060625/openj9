@@ -190,7 +190,7 @@ MM_VerboseManagerJava::handleFileOpenSuccess(MM_EnvironmentBase *env, char *file
 	// PORT_ACCESS_FROM_JAVAVM(static_cast<J9JavaVM*>(_omrVM->_language_vm));
 	// JavaVMInitArgs* vmArgs = vm->vmArgsArray->actualVMArgs;
 	MM_VerboseWriterChain* writer = this->getWriterChain();
-	writer->formatAndOutput(env, 1, "!@ before writeVmArgs");
+	writer->formatAndOutput(env, 1, "!@ handleFileOpenSuccess::before writeVmArgs");
 	MM_VerboseHandlerJava::writeVmArgs(this, env, static_cast<J9JavaVM*>(_omrVM->_language_vm));
 }
 
