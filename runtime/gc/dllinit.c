@@ -88,14 +88,6 @@ J9VMDllMain(J9JavaVM* vm, IDATA stage, void* reserved)
 			
 			// !@!@ JIT_INITIALIZED
 			// rc = triggerGCInitialized(vm->mainThread);
-
-			// J9VMDllLoadInfo* entry = NULL;
-			// entry = FIND_DLL_TABLE_ENTRY( J9_VERBOSE_DLL_NAME );
-			// if( entry->loadFlags & LOAD_BY_DEFAULT)
-			// {
-			// 	rc = triggerGCInitialized(vm->mainThread);
-			// }
-
 			break;
 		
 		case ABOUT_TO_BOOTSTRAP :

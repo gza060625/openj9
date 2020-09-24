@@ -252,7 +252,6 @@ MM_VerboseManagerOld::enableVerboseGC()
 	
 	if (!_hooksAttached){
 		(*_omrHooks)->J9HookRegisterWithCallSite(_omrHooks, J9HOOK_MM_OMR_INITIALIZED, generateVerbosegcEvent, OMR_GET_CALLSITE(), (void *)MM_VerboseEventGCInitialized::newInstance);
-		(*_omrHooks)->J9HookRegisterWithCallSite(_omrHooks, J9HOOK_MM_OMR_INITIALIZED_NOLOCK, generateVerbosegcEvent, OMR_GET_CALLSITE(), (void *)MM_VerboseEventGCInitialized::newInstance);
 		
 		if (extensions->isMetronomeGC()) {
 			enableVerboseGCRealtime();
@@ -550,7 +549,6 @@ MM_VerboseManagerOld::disableAgents()
  * @param iterations The number of gc cycles to log to each file.
  * @return true on success, false on failure
  */
-// !@
 bool
 MM_VerboseManagerOld::configureVerboseGC(OMR_VM *omrVM, char *filename, UDATA fileCount, UDATA iterations)
 {

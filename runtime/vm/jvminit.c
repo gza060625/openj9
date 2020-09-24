@@ -2779,7 +2779,6 @@ modifyDllLoadTable(J9JavaVM * vm, J9Pool* loadTable, J9VMInitArgs* j9vm_args)
 
 	xsnw = ((xsnwIndex = findArgInVMArgs( PORTLIB, j9vm_args, EXACT_MATCH, VMOPT_XSNW, NULL, FALSE))>=0);
 	verbose = ((verboseIndex = findArgInVMArgs( PORTLIB, j9vm_args, OPTIONAL_LIST_MATCH, OPT_VERBOSE, NULL, FALSE))>=0);
-	// !@!@ xverbosegclog
 	xverbosegclog = ((xverbosegclogIndex = findArgInVMArgs( PORTLIB, j9vm_args, OPTIONAL_LIST_MATCH, OPT_XVERBOSEGCLOG, NULL, FALSE))>=0);
 	xnolinenumbers = (findArgInVMArgs( PORTLIB, j9vm_args, EXACT_MATCH, VMOPT_XNOLINENUMBERS, NULL, FALSE) >= 0);
 	xshareclasses = ((xshareclassesIndex = findArgInVMArgs( PORTLIB, j9vm_args, OPTIONAL_LIST_MATCH, VMOPT_XSHARECLASSES, NULL, FALSE))>=0);
@@ -3029,7 +3028,6 @@ modifyDllLoadTable(J9JavaVM * vm, J9Pool* loadTable, J9VMInitArgs* j9vm_args)
 	entry->loadFlags |= LOAD_BY_DEFAULT;
 	JVMINIT_VERBOSE_INIT_VM_TRACE(vm, "verbose support required in j2se... whacking table\n");
 #endif
-// !@!@ if ( xverbosegclog ) 
 	if ( xverbosegclog ) {
 		ADD_FLAG_AT_INDEX( ARG_REQUIRES_LIBRARY, xverbosegclogIndex );
 		entry = findDllLoadInfo(loadTable, J9_VERBOSE_DLL_NAME);

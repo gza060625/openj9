@@ -42,7 +42,7 @@ typedef enum {
 } AgentType;
 
 /** Text output at the start of verbosegc */
-#define VERBOSEGC_HEADER_TEXT_LINE1 "<!@ ?xml version=\"1.0\" ?>"
+#define VERBOSEGC_HEADER_TEXT_LINE1 "<?xml version=\"1.0\" ?>"
 #define VERBOSEGC_HEADER_TEXT_LINE2 "<verbosegc version=\"%s\">"
 #define VERBOSEGC_HEADER_TEXT_ALL VERBOSEGC_HEADER_TEXT_LINE1 "\n\n" VERBOSEGC_HEADER_TEXT_LINE2 "\n\n"
 /** Text output at the end of verbosegc */
@@ -54,7 +54,6 @@ typedef enum {
  * 
  * @ingroup GC_verbose_output_agents
  */
-// !@
 class MM_VerboseOutputAgent : public MM_Base
 {
 protected:
