@@ -274,7 +274,6 @@ MM_VerboseManagerOld::disableVerboseGC()
 	if (_hooksAttached){
 		MM_GCExtensions *extensions = MM_GCExtensions::getExtensions(_omrVM);
 		(*_omrHooks)->J9HookUnregister(_omrHooks, J9HOOK_MM_OMR_INITIALIZED, generateVerbosegcEvent, NULL);
-		(*_omrHooks)->J9HookUnregister(_omrHooks, J9HOOK_MM_OMR_INITIALIZED_NOLOCK, generateVerbosegcEvent, NULL);
 		
 		if (extensions->isMetronomeGC()) {
 			disableVerboseGCRealtime();

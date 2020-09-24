@@ -154,6 +154,7 @@ void
 MM_VerboseStandardStreamOutput::endOfCycle(J9VMThread *vmThread)
 {
 	PORT_ACCESS_FROM_VMC(vmThread);
+	
 	if(NULL != _buffer){
 		if(STDERR == _currentStream){
 			j9file_write_text(J9PORT_TTY_ERR, _buffer->contents(), _buffer->currentSize());

@@ -1145,6 +1145,7 @@ rasDumpEnableHooks(J9JavaVM *vm, UDATA eventFlags)
 			rc = (*vmHooks)->J9HookRegisterWithCallSite(vmHooks, J9HOOK_VM_SLOW_EXCLUSIVE, rasDumpHookSlowExclusive, OMR_GET_CALLSITE(), NULL);
 		}
 		if (eventFlags & J9RAS_DUMP_ON_OBJECT_ALLOCATION) {
+			rc = (*gcOmrHooks)->J9HookRegisterWithCallSite(gcOmrHooks, J9HOOK_MM_OMR_INITIALIZED, rasDumpHookGCInitialized, OMR_GET_CALLSITE(), NULL);
 			rc = (*vmHooks)->J9HookRegisterWithCallSite(vmHooks, J9HOOK_VM_OBJECT_ALLOCATE_WITHIN_THRESHOLD, rasDumpHookAllocationThreshold, OMR_GET_CALLSITE(), NULL);
 		}
 		if (eventFlags & J9RAS_DUMP_ON_CORRUPT_CACHE) {
