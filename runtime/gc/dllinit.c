@@ -85,9 +85,9 @@ J9VMDllMain(J9JavaVM* vm, IDATA stage, void* reserved)
 			/* Register this module with trace */
 			UT_J9MM_MODULE_LOADED(J9_UTINTERFACE_FROM_VM(vm));
 			Trc_MM_VMInitStages_Event1(NULL);
-			
-			// !@!@ JIT_INITIALIZED
-			// rc = triggerGCInitialized(vm->mainThread);
+
+			// rc = triggerGCInitialized(vm->mainThread);  // Should I delete this trigger?
+
 			break;
 		
 		case ABOUT_TO_BOOTSTRAP :
