@@ -182,9 +182,10 @@ MM_VerboseManagerJava::handleFileOpenError(MM_EnvironmentBase *env, char *fileNa
 }
 // !@!@ handleFileOpenSuccess
 void
-MM_VerboseManagerJava::handleFileOpenSuccess(MM_EnvironmentBase *env, char *fileName)
+MM_VerboseManagerJava::handleFileOpenSuccess(MM_EnvironmentBase *env)
 {
-	MM_VerboseWriterChain* writer = this->getWriterChain();
+	// MM_VerboseWriterChain* writer = this->getWriterChain();
+	// writer->formatAndOutput(env, 1, "!@ handleFileOpenSuccess::before writeVmArgs");
 	MM_VerboseHandlerJava::writeVmArgs(this, env, static_cast<J9JavaVM*>(_omrVM->_language_vm));
 }
 
