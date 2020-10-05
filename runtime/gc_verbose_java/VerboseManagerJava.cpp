@@ -186,3 +186,9 @@ MM_VerboseManagerJava::writeVmArgs(MM_EnvironmentBase *env)
 	MM_VerboseHandlerJava::writeVmArgs(this, env, static_cast<J9JavaVM*>(_omrVM->_language_vm));
 }
 
+void
+MM_VerboseManagerJava::writeVmArgsWrapper(MM_EnvironmentBase* env,MM_VerboseWriterChain *writer)
+{
+	MM_VerboseHandlerJava::writeVmArgsWrapper(writer, env, static_cast<J9JavaVM*>(_omrVM->_language_vm));
+}
+

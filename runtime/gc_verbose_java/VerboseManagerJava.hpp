@@ -81,6 +81,8 @@ public:
 	 * Output Java VM arguments.
 	 */
 	virtual void writeVmArgs(MM_EnvironmentBase *env);
+	virtual void writeVmArgsWrapper(MM_EnvironmentBase* env,MM_VerboseWriterChain *writer);
+	
 
 	MM_VerboseManagerJava(OMR_VM *omrVM)
 		: MM_VerboseManager(omrVM)

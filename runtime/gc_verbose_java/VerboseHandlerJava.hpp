@@ -30,6 +30,7 @@
 
 class MM_VerboseManager;
 class MM_EnvironmentBase;
+class MM_VerboseWriterChain;
 
 class MM_VerboseHandlerJava : public MM_Base
 {
@@ -52,6 +53,7 @@ public:
 	 * Output Java VM arguments.
 	 */
 	static void writeVmArgs(MM_VerboseManager *manager, MM_EnvironmentBase* env, J9JavaVM *vm);
+	static void writeVmArgsWrapper(MM_VerboseWriterChain *writer, MM_EnvironmentBase* env, J9JavaVM *vm);
 };
 
 #endif /* VERBOSEHANDLERJAVA_HPP_ */

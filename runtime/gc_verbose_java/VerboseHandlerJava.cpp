@@ -34,6 +34,8 @@
 #include "GCExtensions.hpp"
 #include "FinalizeListManager.hpp"
 
+#include "VerboseWriterChain.hpp"
+
 void
 MM_VerboseHandlerJava::outputFinalizableInfo(MM_VerboseManager *manager, MM_EnvironmentBase *env, UDATA indent)
 {
@@ -63,12 +65,35 @@ MM_VerboseHandlerJava::getThreadName(char *buf, UDATA bufLen, OMR_VMThread *omrT
 }
 
 void
+MM_VerboseHandlerJava::writeVmArgsWrapper(MM_VerboseWriterChain* writer, MM_EnvironmentBase* env, J9JavaVM *vm)
+{
+	PORT_ACCESS_FROM_JAVAVM(vm);
+	JavaVMInitArgs* vmArgs = vm->vmArgsArray->actualVMArgs;
+	// MM_VerboseWriterChain* writer = manager->getWriterChain();
+	writer->formatAndOutput(env, 1, "<vmargs>");
+	for (jint i = 0; i < vmArgs->nOptions; ++i) {
+		char escapedXMLString[128];
+		UDATA optLen = strlen(vmArgs->options[i].optionString);
+		UDATA escapeConsumed = escapeXMLString(OMRPORT_FROM_J9PORT(PORTLIB), escapedXMLString, sizeof(escapedXMLString), vmArgs->options[i].optionString, optLen);
+		const char* dots = (escapeConsumed < optLen) ? "..." : "";
+		if (NULL == vmArgs->options[i].extraInfo) {
+			writer->formatAndOutput(env, 2, "<vmarg name=\"%s%s\" />", escapedXMLString, dots);
+		} else {
+			writer->formatAndOutput(env, 2, "<vmarg name=\"%s%s\" value=\"%p\" />", escapedXMLString, dots, vmArgs->options[i].extraInfo);
+		}
+	}
+	writer->formatAndOutput(env, 1, "</vmargs>");
+	writer->flush(env);
+	// Assert_MM_unreachable();
+}
+
+void
 MM_VerboseHandlerJava::writeVmArgs(MM_VerboseManager *manager, MM_EnvironmentBase* env, J9JavaVM *vm)
 {
 	PORT_ACCESS_FROM_JAVAVM(vm);
 	JavaVMInitArgs* vmArgs = vm->vmArgsArray->actualVMArgs;
 	MM_VerboseWriterChain* writer = manager->getWriterChain();
-	writer->formatAndOutput(env, 1, "<vmargs>");
+	writer->formatAndOutput(env, 1, "!@!@ <vmargs>");
 	for (jint i = 0; i < vmArgs->nOptions; ++i) {
 		char escapedXMLString[128];
 		UDATA optLen = strlen(vmArgs->options[i].optionString);
