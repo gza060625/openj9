@@ -31,7 +31,7 @@
  <variable name="ARGS_FOR_ALL_TESTS" value=" -Dcom.ibm.tools.attach.enable=no -Xdump:system:events=systhrow,filter=java/lang/OutOfMemoryError" />
  <variable name="CP" value="-cp $TESTSJARPATH$" />
  <variable name="XINT" value="-Xint" />
- 
+
  <!-- Arguments specific to the class unloading tests -->
  <variable name="PROGRAM" value="com.ibm.tests.garbagecollector.TestClassLoaderMain" />
  <variable name="MEM" value="8m" />
@@ -42,6 +42,10 @@
  <!-- by default, allocation context count is based on the number of CPUs but this can cause non-deterministic pass/fail conditions -->
  <variable name="RT_ALLOCATION_CONTEXT_ARG" value=" " />
  <variable name="RT_ALLOCATION_CONTEXT_ARG" value="-XXgc:allocationContextCount=1" platforms="Mode301" />
+
+ <!-- Arguments specific platforms -->
+ <variable name="NON_WINDOWS_PLATFORMS" value="aix.*,linux.*,zos.*,osx.*" />
+ <variable name="WINDOWS_PLATFORMS" value="win.*" />
 
  <!-- CMVC 152737: Verify that we can bootstrap the VM even with odd heap sizing parameters (proves that we correctly and consistently round Xms and Xmx) -->
  <test id="Odd memory parameters are accepted">
@@ -330,34 +334,69 @@
   <output regex="no" type="success">&lt;/verbosegc&gt;</output>
  </test>
 
- <test id="GC rotating verbose log file name contains %s">
+ <test id="GC rotating verbose log file name contains %s" platforms="$NON_WINDOWS_PLATFORMS$">
   <!-- check a file with name foo%s%s%s%s%s%s.005 is created -->
   <command>bash -c 'rm -f foo*.*; $EXE$ $XINT$ -verbose:gc -Xms8m -Xmx8m -Xverbosegclog:foo%s%s%s%s%s%s,5,1 $CP$ com.ibm.tests.garbagecollector.SpinAllocate 1; cat foo%s%s%s%s%s%s.005'</command>
   <output regex="no" type="failure">No such file or directory</output>
   <output regex="no" type="success">&lt;/verbosegc&gt;</output>
  </test>
 
- <test id="GC rotating verbose log file name contains %s and other random symbols">
+<test id="GC rotating verbose log file name contains %s" platforms="$WINDOWS_PLATFORMS$">
+  <exec command="rm foo*.*" />
+  <exec command="$EXE$ $XINT$ -verbose:gc -Xms8m -Xmx8m -Xverbosegclog:foo%s%s%s%s%s%s,5,1 $CP$ com.ibm.tests.garbagecollector.SpinAllocate 1" />
+  <!-- check a file with name foo%s%s%s%s%s%s.005 is created -->
+  <command>cat foo%s%s%s%s%s%s.005</command>
+  <output regex="no" type="failure">No such file or directory</output>
+  <output regex="no" type="success">&lt;/verbosegc&gt;</output>
+ </test>
+
+ <test id="GC rotating verbose log file name contains %s and other random symbols" platforms="$NON_WINDOWS_PLATFORMS$">
   <!-- check a file with name foo%s%s%s%s%s%s1234567%s%s%s%s%s%s!@%^*%s%s%s%s%s%sabcdef.005 is created -->
   <command>bash -c 'rm -f foo*.*; $EXE$ $XINT$ -verbose:gc -Xms8m -Xmx8m -Xverbosegclog:foo%s%s%s%s%s%s1234567%s%s%s%s%s%s!@%^*%s%s%s%s%s%sabcdef.#,5,1 $CP$ com.ibm.tests.garbagecollector.SpinAllocate 1; cat foo%s%s%s%s%s%s1234567%s%s%s%s%s%s!@%^*%s%s%s%s%s%sabcdef.005'</command>
   <output regex="no" type="failure">No such file or directory</output>
   <output regex="no" type="success">&lt;/verbosegc&gt;</output>
  </test>
 
- <test id="GC rotating verbose log file name contains %s %c %i">
+<test id="GC rotating verbose log file name contains %s and other random symbols" platforms="$WINDOWS_PLATFORMS$">
+  <exec command="rm foo*.*" />
+  <exec command="$EXE$ $XINT$ -verbose:gc -Xms8m -Xmx8m -Xverbosegclog:foo%s%s%s%s%s%s1234567%s%s%s%s%s%s!@%^*%s%s%s%s%s%sabcdef.#,5,1 $CP$ com.ibm.tests.garbagecollector.SpinAllocate 1" />
+  <!-- check a file with name foo%s%s%s%s%s%s1234567%s%s%s%s%s%s!@%^*%s%s%s%s%s%sabcdef.005 is created -->
+  <command>cat foo%s%s%s%s%s%s1234567%s%s%s%s%s%s!@%^*%s%s%s%s%s%sabcdef.005</command>
+  <output regex="no" type="failure">No such file or directory</output>
+  <output regex="no" type="success">&lt;/verbosegc&gt;</output>
+ </test>
+
+ <test id="GC rotating verbose log file name contains %s %c %i" platforms="$NON_WINDOWS_PLATFORMS$">
   <!-- check a file with name foo%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%i.005 is created -->
   <command>bash -c 'rm -f foo*.*; $EXE$ $XINT$ -verbose:gc -Xms8m -Xmx8m -Xverbosegclog:foo%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%i,5,1 $CP$ com.ibm.tests.garbagecollector.SpinAllocate 1; cat foo%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%i.005'</command>
   <output regex="no" type="failure">No such file or directory</output>
   <output regex="no" type="success">&lt;/verbosegc&gt;</output>
  </test>
 
- <test id="GC rotating verbose log file name contains %s %c %i and other random symbols">
+<test id="GC rotating verbose log file name contains %s %c %i" platforms="$WINDOWS_PLATFORMS$">
+  <exec command="rm foo*.*" />
+  <exec command="$EXE$ $XINT$ -verbose:gc -Xms8m -Xmx8m -Xverbosegclog:foo%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%i,5,1 $CP$ com.ibm.tests.garbagecollector.SpinAllocate 1" />
+  <!-- check a file with name foo%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%i.005 is created -->
+  <command>cat foo%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%i.005</command>
+  <output regex="no" type="failure">No such file or directory</output>
+  <output regex="no" type="success">&lt;/verbosegc&gt;</output>
+ </test>
+
+ <test id="GC rotating verbose log file name contains %s %c %i and other random symbols" platforms="$NON_WINDOWS_PLATFORMS$">
   <!-- check a file with name foo%s%s%s%s%s%s1234567%s%s%s%s%s%s!@%^*%s%s%s%s%s%sabcdef.005 is created -->
   <command>bash -c 'rm -f foo*.*; $EXE$ $XINT$ -verbose:gc -Xms8m -Xmx8m -Xverbosegclog:foo%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%i1234567!@%^*%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%isabcdef.#,5,1 $CP$ com.ibm.tests.garbagecollector.SpinAllocate 1; cat foo%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%i1234567!@%^*%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%isabcdef.005'</command>
   <output regex="no" type="failure">No such file or directory</output>
   <output regex="no" type="success">&lt;/verbosegc&gt;</output>
  </test>
 
+<test id="GC rotating verbose log file name contains %s %c %i and other random symbols" platforms="$WINDOWS_PLATFORMS$">
+  <exec command="rm foo*.*" />
+  <exec command="$EXE$ $XINT$ -verbose:gc -Xms8m -Xmx8m -Xverbosegclog:foo%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%i1234567!@%^*%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%isabcdef.#,5,1 $CP$ com.ibm.tests.garbagecollector.SpinAllocate 1" />
+  <!-- check a file with name foo%s%s%s%s%s%s1234567%s%s%s%s%s%s!@%^*%s%s%s%s%s%sabcdef.005 is created -->
+  <command>cat foo%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%i1234567!@%^*%s%s%s%s%s%s%c%c%c%c%c%i%i%i%i%isabcdef.005</command>
+  <output regex="no" type="failure">No such file or directory</output>
+  <output regex="no" type="success">&lt;/verbosegc&gt;</output>
+ </test>
  <!-- CMVC 178000 - disable until a new version of the test can be added after the GC promotes
  <test id="-verbose:gc -Xverbosegclog:<invalid> - use a file name in a directory that doesn't exist">
   <exec command="rm foo.*.log" />
