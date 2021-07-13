@@ -341,7 +341,7 @@
   <output regex="no" type="success">&lt;/verbosegc&gt;</output>
  </test>
 
-<test id="GC rotating verbose log file name contains %s (windows)" platforms="$WINDOWS_PLATFORMS$">
+<test id="GC rotating verbose log file name contains %s windows" platforms="$WINDOWS_PLATFORMS$">
   <exec command="rm foo*.*" />
   <exec command="$EXE$ $XINT$ -verbose:gc -Xms8m -Xmx8m -Xverbosegclog:foo%s%s%s%s%s%s,5,1 $CP$ com.ibm.tests.garbagecollector.SpinAllocate 1" />
   <!-- check a file with name foo%s%s%s%s%s%s.005 is created -->
