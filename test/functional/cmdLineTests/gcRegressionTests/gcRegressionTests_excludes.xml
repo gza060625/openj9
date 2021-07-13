@@ -49,6 +49,11 @@
 <exclude id="GC rotating verbose log file name contains %s %c %i" platform="Mode301" shouldFix="false"><reason>Metronome does not cause multiple verboseGC logging files</reason></exclude>
 <exclude id="GC rotating verbose log file name contains %s %c %i and other random symbols" platform="Mode301" shouldFix="false"><reason>Metronome does not cause multiple verboseGC logging files</reason></exclude>
 
+<exclude id="GC rotating verbose log file name contains %s (windows)" platform="Mode301" shouldFix="false"><reason>Metronome does not cause multiple verboseGC logging files</reason></exclude>
+<exclude id="GC rotating verbose log file name contains %s and other random symbols (windows)" platform="Mode301" shouldFix="false"><reason>Metronome does not cause multiple verboseGC logging files</reason></exclude>
+<exclude id="GC rotating verbose log file name contains %s %c %i (windows)" platform="Mode301" shouldFix="false"><reason>Metronome does not cause multiple verboseGC logging files</reason></exclude>
+<exclude id="GC rotating verbose log file name contains %s %c %i and other random symbols (windows)" platform="Mode301" shouldFix="false"><reason>Metronome does not cause multiple verboseGC logging files</reason></exclude>
+
 <!-- The Windows system also does not support the * character in file or directory names.  -->
 <exclude id="GC rotating verbose log file name contains %s and other random symbols" platform="win_x86.*" shouldFix="false"><reason>Windows does not support * symbol</reason></include>
 <exclude id="GC rotating verbose log file name contains %s %c %i and other random symbols" platform="win_x86.*" shouldFix="false"><reason>Windows does not support * symbol</reason></include>
