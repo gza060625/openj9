@@ -54,12 +54,6 @@
 <exclude id="GC rotating verbose log file name contains %s %c %i (windows)" platform="Mode301" shouldFix="false"><reason>Metronome does not cause multiple verboseGC logging files</reason></exclude>
 <exclude id="GC rotating verbose log file name contains %s %c %i and other random symbols (windows)" platform="Mode301" shouldFix="false"><reason>Metronome does not cause multiple verboseGC logging files</reason></exclude>
 
-<!-- The Windows system also does not support the * character in file or directory names.  -->
-<exclude id="GC rotating verbose log file name contains %s and other random symbols" platform="win_x86.*" shouldFix="false"><reason>Windows does not support * symbol</reason></include>
-<exclude id="GC rotating verbose log file name contains %s %c %i and other random symbols" platform="win_x86.*" shouldFix="false"><reason>Windows does not support * symbol</reason></include>
-<exclude id="GC rotating verbose log file name contains %s and other random symbols (windows)" platform="win_x86.*" shouldFix="false"><reason>Windows does not support * symbol</reason></include>
-<exclude id="GC rotating verbose log file name contains %s %c %i and other random symbols (windows)" platform="win_x86.*" shouldFix="false"><reason>Windows does not support * symbol</reason></include>
-
 <!-- only Gencon GC is supported on RISC-V -->
 <exclude id="Excessive GC throws OOM" platform="linux_riscv.*" shouldFix="false"><reason>The initial memory setting does not work on RISC-V</reason></exclude>
 <include id="Excessive GC throws OOM on RISC-V" platform="linux_riscv.*" shouldFix="false"><reason>The initial memory setting is only used to trigger the OOM on RISC-V</reason></include>
